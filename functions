@@ -1,0 +1,74 @@
+### Set Current Directory's Finder View to Icon View
+
+function icon_view {
+    osascript -e 'set cwd to do shell script "pwd"'\
+      -e 'tell application "Finder"'\
+      -e "if (${1-1} <= (count Finder windows)) then"\
+      -e "set the target of window ${1-1} to (POSIX file cwd) as string"\
+      -e "set the current view of the front Finder window to icon view"\
+      -e 'else' -e "open (POSIX file cwd) as string"\
+      -e "set the current view of the front Finder window to icon view"\
+      -e 'end if' -e 'end tell';
+};
+
+
+### Set Current Directory's Finder View to Column View
+
+function column_view {
+    osascript -e 'set cwd to do shell script "pwd"'\
+      -e 'tell application "Finder"'\
+      -e "if (${1-1} <= (count Finder windows)) then"\
+      -e "set the target of window ${1-1} to (POSIX file cwd) as string"\
+      -e "set the current view of the front Finder window to column view"\
+      -e 'else' -e "open (POSIX file cwd) as string"\
+      -e "set the current view of the front Finder window to column view"\
+      -e 'end if' -e 'end tell';
+}
+
+function flush_net {
+  sudo dscacheutil -flushcache && \
+  sudo killall -HUP mDNSResponder && \
+}
+
+function get_net {
+  #sudo ipconfig set en0 DHCP
+  #ipconfig getpacket en0
+  scutil --nwi
+}
+
+### Set Current Directory's Finder View to List View
+
+function list_view {
+  osascript -e 'set cwd to do shell script "pwd"'\
+    -e 'tell application "Finder"'\
+    -e "if (${1-1} <= (count Finder windows)) then"\
+    -e "set the target of window ${1-1} to (POSIX file cwd) as string"\
+    -e "set the current view of the front Finder window to list view"\
+    -e 'else' -e "open (POSIX file cwd) as string"\
+    -e "set the current view of the front Finder window to list view"\
+    -e 'end if' -e 'end tell';\
+}
+
+
+### Function to quickly create an application icon from 1024px master file
+
+function mkicns() {
+    if [[ -z "$@" ]]; then
+        echo "Input file missing"
+    else
+        filename=${1%.*}
+        mkdir $filename.iconset
+        sips -z 16 16   $1 --out $filename.iconset/icon_16x16.png
+        sips -z 32 32   $1 --out $filename.iconset/icon_16x16@2x.png
+        sips -z 32 32   $1 --out $filename.iconset/icon_32x32.png
+        sips -z 64 64   $1 --out $filename.iconset/icon_32x32@2x.png
+        sips -z 128 128 $1 --out $filename.iconset/icon_128x128.png
+        sips -z 256 256 $1 --out $filename.iconset/icon_128x128@2x.png
+        sips -z 256 256 $1 --out $filename.iconset/icon_256x256.png
+        sips -z 512 512 $1 --out $filename.iconset/icon_256x256@2x.png
+        sips -z 512 512 $1 --out $filename.iconset/icon_512x512.png
+        cp $1 $filename.iconset/icon_512x512@2x.png
+        iconutil -c icns $filename.iconset
+        rm -r $filename.iconset
+    fi
+}

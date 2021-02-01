@@ -1,0 +1,7 @@
+alias ls="ls -lah"
+alias serve="PORT=4433 serve"
+alias sourcerc="source ~/.zshrc"
+alias yarnu="yarn upgrade-interactive --latest"
+alias restart="sudo reboot"
+alias shutdown="sudo poweroff"
+alias libtool="glibtool"
