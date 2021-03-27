@@ -1,7 +1,9 @@
 [user]
-	name = Joseph Gattuso
-	email = 19511143+josephgattuso@users.noreply.github.com
-	name = Joseph Gattuso
-	signingkey = 0FF7E213437E4826
+  name = Joseph Gattuso
+  email = 19511143+josephgattuso@users.noreply.github.com
+[color]
+  ui = auto
 [commit]
-	gpgsign = true
+  gpgsign = true
+[include]
+  path = ~/.gitconfig.local
