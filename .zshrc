@@ -2,9 +2,9 @@
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # heroku autocomplete setup
-HEROKU_AC_ZSH_SETUP_PATH=/Users/jgattus/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+#HEROKU_AC_ZSH_SETUP_PATH=/Users/jgattus/Library/Caches/heroku/autocomplete/zsh_setup && test -f #$HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
 	
 source /Users/jgattus/.profile
 
